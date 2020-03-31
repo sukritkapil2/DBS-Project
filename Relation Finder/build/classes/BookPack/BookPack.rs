@@ -1,2 +1,0 @@
-BookPack.Book
-BookPack.BookDemo
