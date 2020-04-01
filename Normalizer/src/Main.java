@@ -46,8 +46,17 @@ public class Main extends javax.swing.JFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList<>();
         jPanel13 = new javax.swing.JPanel();
+        jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
+        jDialog3 = new javax.swing.JDialog();
+        jPanel14 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jPanel15 = new javax.swing.JPanel();
+        jPanel16 = new javax.swing.JPanel();
         jButton13 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
+        jButton16 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -254,19 +263,19 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton12.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jButton12.setText("OK");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        jButton11.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jButton11.setText("OK");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                jButton11ActionPerformed(evt);
             }
         });
 
-        jButton13.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jButton13.setText("Clear Selection");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
+        jButton12.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jButton12.setText("Clear Selection");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
+                jButton12ActionPerformed(evt);
             }
         });
 
@@ -276,9 +285,9 @@ public class Main extends javax.swing.JFrame {
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton13)
+                .addComponent(jButton12)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
@@ -286,8 +295,8 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton12)
-                    .addComponent(jButton13))
+                    .addComponent(jButton11)
+                    .addComponent(jButton12))
                 .addContainerGap())
         );
 
@@ -312,6 +321,109 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
                 .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jDialog3.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jDialog3.setTitle("Delete Functional Dependencies");
+        jDialog3.setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
+        jDialog3.setResizable(false);
+
+        jPanel15.setLayout(new java.awt.GridLayout(0, 1, 0, 5));
+        jScrollPane8.setViewportView(jPanel15);
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jButton13.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jButton13.setText("OK");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+
+        jButton14.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jButton14.setText("Cancel");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
+
+        jButton15.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jButton15.setText("Select All");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
+
+        jButton16.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jButton16.setText("Select None");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton16)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton14)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton15)
+                    .addComponent(jButton16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton13)
+                    .addComponent(jButton14))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jDialog3Layout = new javax.swing.GroupLayout(jDialog3.getContentPane());
+        jDialog3.getContentPane().setLayout(jDialog3Layout);
+        jDialog3Layout.setHorizontalGroup(
+            jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jDialog3Layout.setVerticalGroup(
+            jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog3Layout.createSequentialGroup()
+                .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -433,6 +545,11 @@ public class Main extends javax.swing.JFrame {
 
         jButton5.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         jButton5.setText("Delete Functional Dependency");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -683,19 +800,23 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        jPanel5.setVisible(false);
-        jPanel6.setVisible(false);
-        this.pack();
-        this.setLocationRelativeTo(null);
-        //Do not alter code before this line
-        //Code should be wriiten after this line
-        attribute.clear();
-        dependency.clear();
-        jTextArea1.setText(null);
-        jTextArea2.setText(null);
-        jTextArea3.setText(null);
-        jTextArea4.setText(null);
-        jLabel7.setText(null);
+        int q = JOptionPane.showConfirmDialog(null, "Clear All?", "Clear", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(q == JOptionPane.YES_OPTION)
+        {
+            jPanel5.setVisible(false);
+            jPanel6.setVisible(false);
+            this.pack();
+            this.setLocationRelativeTo(null);
+            //Do not alter code before this line
+            //Code should be wriiten after this line
+            attribute.clear();
+            dependency.clear();
+            jTextArea1.setText(null);
+            jTextArea2.setText(null);
+            jTextArea3.setText(null);
+            jTextArea4.setText(null);
+            jLabel7.setText(null);
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -747,7 +868,7 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         if(jList1.isSelectionEmpty())
         {
             JOptionPane.showMessageDialog(null, "Left side not selected!", "Add Functional Dependency", JOptionPane.WARNING_MESSAGE);
@@ -793,7 +914,7 @@ public class Main extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_jButton12ActionPerformed
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if(attribute.isEmpty())
@@ -813,35 +934,51 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         jList1.clearSelection();
         jList2.clearSelection();
-    }//GEN-LAST:event_jButton13ActionPerformed
+    }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        int q = JOptionPane.showConfirmDialog(null, "Are you sure to delete?", "Delete Attributes", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if(q == JOptionPane.YES_OPTION)
+        boolean flag = false;
+        for(JCheckBox chk : box)
         {
-            Vector<Vector<ArrayList<String>>> values = new Vector<>();
-            for(JCheckBox chk : box)
+            if(chk.isSelected())
             {
-                if(chk.isSelected())
+                flag = true;
+                break;
+            }
+        }
+        if(flag)
+        {
+            int q = JOptionPane.showConfirmDialog(null, "Are you sure to delete?", "Delete Attributes", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(q == JOptionPane.YES_OPTION)
+            {
+                Vector<Vector<ArrayList<String>>> values = new Vector<>();
+                for(JCheckBox chk : box)
                 {
-                    String attr = chk.getText();
-                    attribute.remove(attr);
-                    for(Vector<ArrayList<String>> dep : dependency)
+                    if(chk.isSelected())
                     {
-                        if(dep.get(0).contains(attr) || dep.get(1).contains(attr))
+                        String attr = chk.getText();
+                        attribute.remove(attr);
+                        for(Vector<ArrayList<String>> dep : dependency)
                         {
-                            values.add(dep);
+                            if((dep.get(0).contains(attr) || dep.get(1).contains(attr)) && !values.contains(dep))
+                            {
+                                values.add(dep);
+                            }
                         }
                     }
                 }
+                dependency.removeAll(values);
+                this.printattributes();
+                this.printdependencies();
+                jDialog1.dispose();
             }
-            dependency.removeAll(values);
-            this.printattributes();
-            this.printdependencies();
-            jDialog1.dispose();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "No attribute selected!", "Delete Attributes", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -863,6 +1000,98 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        if(dependency.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "No dependencies present!", "Delete Functional Dependency", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else
+        {
+            jPanel15.removeAll();
+            box.clear();
+            for(Vector<ArrayList<String>> dep : dependency)
+            {
+                String s = "";
+                for(String attr : dep.get(0))
+                {
+                    if(s.isEmpty())
+                    {
+                        s += attr;
+                    }
+                    else
+                    {
+                        s += ", " + attr;
+                    }
+                }
+                s += " --> " + dep.get(1).get(0);
+                JCheckBox chk = new JCheckBox(s);
+                chk.setFont(new Font("Times New Roman",0,18));
+                box.add(chk);
+                jPanel15.add(chk);
+            }
+            jDialog3.pack();
+            jDialog3.setLocationRelativeTo(null);
+            jDialog3.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        boolean flag = false;
+        for(JCheckBox chk : box)
+        {
+            if(chk.isSelected())
+            {
+                flag = true;
+                break;
+            }
+        }
+        if(flag)
+        {
+            int q = JOptionPane.showConfirmDialog(null, "Are you sure to delete?", "Delete Functional Dependencies", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(q == JOptionPane.YES_OPTION)
+            {
+                Vector<Integer> value = new Vector<>();
+                for(JCheckBox chk : box)
+                {
+                    if(chk.isSelected())
+                    {
+                        value.add(box.indexOf(chk));
+                    }
+                }
+                Vector<Vector<ArrayList<String>>> dep = new Vector<>();
+                for(Integer n : value)
+                {
+                    dep.add(dependency.get(n));
+                }
+                dependency.removeAll(dep);
+                this.printdependencies();
+                jDialog3.dispose();
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "No dependency selected!", "Delete Functional Dependency", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        jDialog3.dispose();
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        for(JCheckBox chk : box)
+        {
+            chk.setSelected(true);
+        }
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        for(JCheckBox chk : box)
+        {
+            chk.setSelected(false);
+        }
+    }//GEN-LAST:event_jButton16ActionPerformed
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -882,8 +1111,12 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -894,6 +1127,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
+    private javax.swing.JDialog jDialog3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -910,6 +1144,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -925,6 +1162,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
