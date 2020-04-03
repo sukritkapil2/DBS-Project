@@ -89,6 +89,9 @@ public class Main extends javax.swing.JFrame {
         jDialog1.setTitle("Delete Attributes");
         jDialog1.setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
 
+        jPanel7.setBackground(new java.awt.Color(0, 51, 102));
+
+        jPanel8.setBackground(new java.awt.Color(255, 153, 153));
         jPanel8.setLayout(new java.awt.GridLayout(0, 1, 0, 5));
         jScrollPane5.setViewportView(jPanel8);
 
@@ -109,7 +112,11 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel9.setBackground(new java.awt.Color(102, 102, 102));
+
+        jButton7.setBackground(new java.awt.Color(0, 0, 0));
         jButton7.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(255, 255, 255));
         jButton7.setText("OK");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +124,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton8.setBackground(new java.awt.Color(255, 255, 255));
         jButton8.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         jButton8.setText("Cancel");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +133,9 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton9.setBackground(new java.awt.Color(0, 0, 0));
         jButton9.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jButton9.setForeground(new java.awt.Color(255, 255, 255));
         jButton9.setText("Select All");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -192,6 +202,9 @@ public class Main extends javax.swing.JFrame {
         jDialog2.setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
         jDialog2.setResizable(false);
 
+        jPanel10.setBackground(new java.awt.Color(0, 51, 102));
+
+        jList1.setBackground(new java.awt.Color(153, 255, 102));
         jList1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jList1.setModel(listmodel);
         jScrollPane6.setViewportView(jList1);
@@ -213,11 +226,15 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel11.setBackground(new java.awt.Color(0, 51, 102));
+
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("-->");
+        jLabel8.setText("--->");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Determines");
 
@@ -242,6 +259,9 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(178, Short.MAX_VALUE))
         );
 
+        jPanel12.setBackground(new java.awt.Color(0, 51, 102));
+
+        jList2.setBackground(new java.awt.Color(255, 153, 153));
         jList2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jList2.setModel(listmodel);
         jScrollPane7.setViewportView(jList2);
@@ -263,7 +283,11 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel13.setBackground(new java.awt.Color(102, 102, 102));
+
+        jButton11.setBackground(new java.awt.Color(0, 0, 0));
         jButton11.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jButton11.setForeground(new java.awt.Color(255, 255, 255));
         jButton11.setText("OK");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -328,6 +352,9 @@ public class Main extends javax.swing.JFrame {
         jDialog3.setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
         jDialog3.setResizable(false);
 
+        jPanel14.setBackground(new java.awt.Color(0, 51, 102));
+
+        jPanel15.setBackground(new java.awt.Color(255, 153, 153));
         jPanel15.setLayout(new java.awt.GridLayout(0, 1, 0, 5));
         jScrollPane8.setViewportView(jPanel15);
 
@@ -348,7 +375,11 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel16.setBackground(new java.awt.Color(102, 102, 102));
+
+        jButton13.setBackground(new java.awt.Color(0, 0, 0));
         jButton13.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jButton13.setForeground(new java.awt.Color(255, 255, 255));
         jButton13.setText("OK");
         jButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -364,7 +395,9 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton15.setBackground(new java.awt.Color(0, 0, 0));
         jButton15.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jButton15.setForeground(new java.awt.Color(255, 255, 255));
         jButton15.setText("Select All");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -462,6 +495,7 @@ public class Main extends javax.swing.JFrame {
         jLabel2.setText("Attributes:");
 
         jTextArea1.setEditable(false);
+        jTextArea1.setBackground(new java.awt.Color(255, 153, 153));
         jTextArea1.setColumns(19);
         jTextArea1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jTextArea1.setRows(5);
@@ -528,6 +562,7 @@ public class Main extends javax.swing.JFrame {
         jLabel3.setText("Functional Dependencies:");
 
         jTextArea2.setEditable(false);
+        jTextArea2.setBackground(new java.awt.Color(153, 255, 102));
         jTextArea2.setColumns(20);
         jTextArea2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jTextArea2.setRows(5);
@@ -634,6 +669,7 @@ public class Main extends javax.swing.JFrame {
         jLabel4.setText("Decomposed Relations and Keys:");
 
         jTextArea3.setEditable(false);
+        jTextArea3.setBackground(new java.awt.Color(153, 255, 102));
         jTextArea3.setColumns(20);
         jTextArea3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jTextArea3.setRows(5);
@@ -670,6 +706,7 @@ public class Main extends javax.swing.JFrame {
         jLabel5.setText("Keys:");
 
         jTextArea4.setEditable(false);
+        jTextArea4.setBackground(new java.awt.Color(255, 153, 153));
         jTextArea4.setColumns(19);
         jTextArea4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jTextArea4.setRows(5);
