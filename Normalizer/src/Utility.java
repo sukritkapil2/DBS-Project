@@ -97,13 +97,13 @@ public class Utility
         switch(min)
         {
             case 1:
-                Utility.decomposeSecond(obj);
+                Utility.decompose(obj, "1");
                 break;
             case 2:
-                Utility.decomposeThird(obj);
+                Utility.decompose(obj, "2");
                 break;
             case 3:
-                Utility.decomposeBCNF(obj);
+                Utility.decompose(obj, "3");
                 break;
             default:
                 obj.jTextArea3.append("No decomposition required");
@@ -287,7 +287,7 @@ public class Utility
         }
     }
     
-    private static void decomposeSecond(Main obj)
+    private static void decompose(Main obj, String nf)
     {
         boolean flag;
         int i = 1;
@@ -298,81 +298,7 @@ public class Utility
             ArrayList<String> key = null;
             for(Vector<ArrayList<String>> dep : obj.dependency)
             {
-                if(dep.get(2).get(0).equals("1"))
-                {
-                    key = dep.get(0);
-                    newTable.addAll(dep.get(0));
-                    newTable.add(dep.get(1).get(0));
-                    obj.attribute.remove(dep.get(1).get(0));
-                    flag = true;
-                    break;
-                }
-            }
-            if(flag)
-            {
-                obj.jTextArea3.append("Relation " + (i++) + newTable.toString() + "        Key: " + key.toString() + "\n");
-                Utility.updateDependency(obj);
-                Utility.getClosureAll(obj);
-                Utility.getKeys(obj);
-                Utility.getNormalFormAll(obj);
-            }
-        } while(flag);
-        if(!obj.attribute.isEmpty())
-        {
-            String keys = obj.keys.toString();
-            obj.jTextArea3.append("Relation " + (i++) + obj.attribute.toString() + "        Key: " + keys.substring(1, keys.length()-1) + "\n");
-        }
-    }
-    
-    private static void decomposeThird(Main obj)
-    {
-        boolean flag;
-        int i = 1;
-        do
-        {
-            flag = false;
-            ArrayList<String> newTable = new ArrayList<>();
-            ArrayList<String> key = null;
-            for(Vector<ArrayList<String>> dep : obj.dependency)
-            {
-                if(dep.get(2).get(0).equals("2"))
-                {
-                    key = dep.get(0);
-                    newTable.addAll(dep.get(0));
-                    newTable.add(dep.get(1).get(0));
-                    obj.attribute.remove(dep.get(1).get(0));
-                    flag = true;
-                    break;
-                }
-            }
-            if(flag)
-            {
-                obj.jTextArea3.append("Relation " + (i++) + newTable.toString() + "        Key: " + key.toString() + "\n");
-                Utility.updateDependency(obj);
-                Utility.getClosureAll(obj);
-                Utility.getKeys(obj);
-                Utility.getNormalFormAll(obj);
-            }
-        } while(flag);
-        if(!obj.attribute.isEmpty())
-        {
-            String keys = obj.keys.toString();
-            obj.jTextArea3.append("Relation " + (i++) + obj.attribute.toString() + "        Key: " + keys.substring(1, keys.length()-1) + "\n");
-        }
-    }
-    
-    private static void decomposeBCNF(Main obj)
-    {
-        boolean flag;
-        int i = 1;
-        do
-        {
-            flag = false;
-            ArrayList<String> newTable = new ArrayList<>();
-            ArrayList<String> key = null;
-            for(Vector<ArrayList<String>> dep : obj.dependency)
-            {
-                if(dep.get(2).get(0).equals("3"))
+                if(dep.get(2).get(0).equals(nf))
                 {
                     key = dep.get(0);
                     newTable.addAll(dep.get(0));
