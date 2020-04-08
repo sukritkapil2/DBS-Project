@@ -14,12 +14,16 @@ import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 
-public class Main extends javax.swing.JFrame {
-    public Main() {
+public class Main extends javax.swing.JFrame
+{
+    public Main()
+    {
+        this.keys = new Vector<>();
+        this.closure = new Vector<>();
         this.dependency = new Vector<>();
         this.listmodel = new DefaultListModel();
         this.box = new Vector<>();
-        this.attribute = new Vector<>();
+        this.attribute = new ArrayList<>();
         initComponents();
     }
     @SuppressWarnings("unchecked")
@@ -532,7 +536,7 @@ public class Main extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel2)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(5, 5, 5))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -552,7 +556,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addGap(20, 20, 20))
+                .addContainerGap())
         );
 
         jPanel4.setBackground(new java.awt.Color(0, 51, 102));
@@ -594,18 +598,17 @@ public class Main extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2)
+                        .addContainerGap())
+                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jButton3)
-                                .addGap(18, 18, Short.MAX_VALUE)
-                                .addComponent(jButton5)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(5, 5, 5))))
+                        .addComponent(jButton3)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(jButton5)
+                        .addGap(0, 5, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -618,7 +621,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton5))
-                .addGap(20, 20, 20))
+                .addContainerGap())
         );
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 102));
@@ -682,7 +685,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1077, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -730,16 +733,18 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5))
+                .addComponent(jLabel6)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -748,12 +753,12 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -762,7 +767,7 @@ public class Main extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -775,9 +780,11 @@ public class Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(0, 0, 0)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -790,62 +797,50 @@ public class Main extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    Vector<String> attribute;
-    Vector<JCheckBox> box;
-    Vector<Vector<ArrayList<String>>> dependency;
-    DefaultListModel listmodel;
-    
-    private void printattributes()
-    {
-        jTextArea1.setText(null);
-        for(String attr : attribute)
-        {
-            jTextArea1.append(attr + "\n");
-        }
-    }
-    
-    private void printdependencies()
-    {
-        jTextArea2.setText(null);
-        for(Vector<ArrayList<String>> dep : dependency)
-        {
-            boolean newline = true;
-            for(String leftattr : dep.get(0))
-            {
-                if(newline)
-                {
-                    jTextArea2.append(leftattr);
-                    newline = false;
-                }
-                else
-                {
-                    jTextArea2.append(", " + leftattr);
-                }
-            }
-            jTextArea2.append(" --> " + dep.get(1).get(0) + "\n");
-        }
-    }
+    public ArrayList<String> attribute;
+    public Vector<Vector<ArrayList<String>>> dependency;
+    public Vector<Vector<ArrayList<String>>> closure;
+    public Vector<ArrayList<String>> keys;
+    public Vector<JCheckBox> box;
+    public DefaultListModel listmodel;
     
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        jLabel7.setText("Demo");
-        //Code should be written before this line
-        //Do not alter code after this line
-        jPanel5.setVisible(true);
-        jPanel6.setVisible(true);
-        this.pack();
-        this.setLocationRelativeTo(null);
+        if(attribute.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "No attributes present!", "Normalize", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else
+        {
+            Utility.printKeys(this);
+            Utility.printNormalForm(this);
+            Utility.printDecomposition(this);
+            jButton1.setVisible(false);
+            jButton2.setVisible(false);
+            jButton3.setVisible(false);
+            jButton4.setVisible(false);
+            jButton5.setVisible(false);
+            jButton6.setText("Start New");
+            jPanel5.setVisible(true);
+            jPanel6.setVisible(true);
+            this.pack();
+            this.setLocationRelativeTo(null);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         int q = JOptionPane.showConfirmDialog(null, "Clear All?", "Clear", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(q == JOptionPane.YES_OPTION)
         {
+            jButton1.setVisible(true);
+            jButton2.setVisible(true);
+            jButton3.setVisible(true);
+            jButton4.setVisible(true);
+            jButton5.setVisible(true);
+            jButton6.setText("Clear");
             jPanel5.setVisible(false);
             jPanel6.setVisible(false);
             this.pack();
             this.setLocationRelativeTo(null);
-            //Do not alter code before this line
-            //Code should be wriiten after this line
             attribute.clear();
             dependency.clear();
             jTextArea1.setText(null);
@@ -875,7 +870,7 @@ public class Main extends javax.swing.JFrame {
                 else
                 {
                     attribute.add(s);
-                    this.printattributes();
+                    Utility.printAttributes(this);
                 }
             }
         }
@@ -946,7 +941,7 @@ public class Main extends javax.swing.JFrame {
                         dependency.add(dep);
                         jList1.clearSelection();
                         jList2.clearSelection();
-                        this.printdependencies();
+                        Utility.printDependencies(this);
                     }
                 }
             }
@@ -991,25 +986,15 @@ public class Main extends javax.swing.JFrame {
             int q = JOptionPane.showConfirmDialog(null, "Are you sure to delete?", "Delete Attributes", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if(q == JOptionPane.YES_OPTION)
             {
-                Vector<Vector<ArrayList<String>>> values = new Vector<>();
                 for(JCheckBox chk : box)
                 {
                     if(chk.isSelected())
                     {
-                        String attr = chk.getText();
-                        attribute.remove(attr);
-                        for(Vector<ArrayList<String>> dep : dependency)
-                        {
-                            if((dep.get(0).contains(attr) || dep.get(1).contains(attr)) && !values.contains(dep))
-                            {
-                                values.add(dep);
-                            }
-                        }
+                        attribute.remove(chk.getText());
                     }
                 }
-                dependency.removeAll(values);
-                this.printattributes();
-                this.printdependencies();
+                Utility.printAttributes(this);
+                Utility.printDependencies(this);
                 jDialog1.dispose();
             }
         }
@@ -1101,7 +1086,7 @@ public class Main extends javax.swing.JFrame {
                     dep.add(dependency.get(n));
                 }
                 dependency.removeAll(dep);
-                this.printdependencies();
+                Utility.printDependencies(this);
                 jDialog3.dispose();
             }
         }
@@ -1146,63 +1131,63 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JDialog jDialog1;
-    private javax.swing.JDialog jDialog2;
-    private javax.swing.JDialog jDialog3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextArea jTextArea4;
+    public javax.swing.JButton jButton1;
+    public javax.swing.JButton jButton10;
+    public javax.swing.JButton jButton11;
+    public javax.swing.JButton jButton12;
+    public javax.swing.JButton jButton13;
+    public javax.swing.JButton jButton14;
+    public javax.swing.JButton jButton15;
+    public javax.swing.JButton jButton16;
+    public javax.swing.JButton jButton2;
+    public javax.swing.JButton jButton3;
+    public javax.swing.JButton jButton4;
+    public javax.swing.JButton jButton5;
+    public javax.swing.JButton jButton6;
+    public javax.swing.JButton jButton7;
+    public javax.swing.JButton jButton8;
+    public javax.swing.JButton jButton9;
+    public javax.swing.JDialog jDialog1;
+    public javax.swing.JDialog jDialog2;
+    public javax.swing.JDialog jDialog3;
+    public javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel jLabel2;
+    public javax.swing.JLabel jLabel3;
+    public javax.swing.JLabel jLabel4;
+    public javax.swing.JLabel jLabel5;
+    public javax.swing.JLabel jLabel6;
+    public javax.swing.JLabel jLabel7;
+    public javax.swing.JLabel jLabel8;
+    public javax.swing.JLabel jLabel9;
+    public javax.swing.JList<String> jList1;
+    public javax.swing.JList<String> jList2;
+    public javax.swing.JPanel jPanel1;
+    public javax.swing.JPanel jPanel10;
+    public javax.swing.JPanel jPanel11;
+    public javax.swing.JPanel jPanel12;
+    public javax.swing.JPanel jPanel13;
+    public javax.swing.JPanel jPanel14;
+    public javax.swing.JPanel jPanel15;
+    public javax.swing.JPanel jPanel16;
+    public javax.swing.JPanel jPanel2;
+    public javax.swing.JPanel jPanel3;
+    public javax.swing.JPanel jPanel4;
+    public javax.swing.JPanel jPanel5;
+    public javax.swing.JPanel jPanel6;
+    public javax.swing.JPanel jPanel7;
+    public javax.swing.JPanel jPanel8;
+    public javax.swing.JPanel jPanel9;
+    public javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JScrollPane jScrollPane2;
+    public javax.swing.JScrollPane jScrollPane3;
+    public javax.swing.JScrollPane jScrollPane4;
+    public javax.swing.JScrollPane jScrollPane5;
+    public javax.swing.JScrollPane jScrollPane6;
+    public javax.swing.JScrollPane jScrollPane7;
+    public javax.swing.JScrollPane jScrollPane8;
+    public javax.swing.JTextArea jTextArea1;
+    public javax.swing.JTextArea jTextArea2;
+    public javax.swing.JTextArea jTextArea3;
+    public javax.swing.JTextArea jTextArea4;
     // End of variables declaration//GEN-END:variables
 }
