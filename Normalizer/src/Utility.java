@@ -84,7 +84,10 @@ public class Utility
     
     public static void printDecomposition(Main obj)
     {
-        obj.jTextArea3.setText(null);
+        if(obj.jButton4.getText().equals("Normalize"))
+        {
+            obj.jTextArea3.setText(null);
+        }
         int min = 4;
         for(Vector<ArrayList<String>> dep : obj.dependency)
         {
@@ -97,16 +100,44 @@ public class Utility
         switch(min)
         {
             case 1:
+                obj.jTextArea3.append("Decomposing to 2nd NF\n");
                 Utility.decompose(obj, "1");
                 break;
             case 2:
+                if(obj.jButton4.getText().equals("Normalize further"))
+                {
+                    obj.jTextArea3.append("\n\n");
+                    obj.jTextArea3.append("Decomposing last relation to 3rd NF\n");
+                }
+                else
+                {
+                    obj.jTextArea3.append("Decomposing to 3rd NF\n");
+                }
                 Utility.decompose(obj, "2");
                 break;
             case 3:
+                if(obj.jButton4.getText().equals("Normalize further"))
+                {
+                    obj.jTextArea3.append("\n\n");
+                    obj.jTextArea3.append("Decomposing last relation to BCNF\n");
+                }
+                else
+                {
+                    obj.jTextArea3.append("Decomposing to BCNF\n");
+                }
                 Utility.decompose(obj, "3");
                 break;
             default:
-                obj.jTextArea3.append("No decomposition required");
+                if(obj.jButton4.getText().equals("Normalize further"))
+                {
+                    obj.jTextArea3.append("\n\n");
+                    obj.jTextArea3.append("No further decomposition required");
+                }
+                else
+                {
+                    obj.jTextArea3.append("No decomposition required");
+                }
+                obj.jButton4.setVisible(false);
                 break;
         }
     }
@@ -283,7 +314,11 @@ public class Utility
             {
                 nf.add("4");
             }
-            dep.add(2, nf);
+            while(dep.size()>2)
+            {
+                dep.remove(2);
+            }
+            dep.add(nf);
         }
     }
     
@@ -320,7 +355,7 @@ public class Utility
         if(!obj.attribute.isEmpty())
         {
             String keys = obj.keys.toString();
-            obj.jTextArea3.append("Relation " + (i++) + obj.attribute.toString() + "        Key: " + keys.substring(1, keys.length()-1) + "\n");
+            obj.jTextArea3.append("Relation " + (i++) + obj.attribute.toString() + "        Key: " + keys.substring(1, keys.length()-1));
         }
     }
 }
