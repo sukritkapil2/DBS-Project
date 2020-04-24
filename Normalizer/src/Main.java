@@ -914,39 +914,48 @@ public class Main extends javax.swing.JFrame
         }
         else
         {
-            boolean flag = true;
+            boolean trivflag = false;
+            boolean addflag = false;
             ArrayList<String> left = (ArrayList<String>) jList1.getSelectedValuesList();
             ArrayList<String> right = (ArrayList<String>) jList2.getSelectedValuesList();
-            for(String value : left)
+            for(String rightattr : right)
             {
-                if(right.contains(value))
+                if(left.contains(rightattr))
                 {
-                    JOptionPane.showMessageDialog(null, "Same attribute(s) found on both sides.\nDependency not added.", "Add Functional Dependency", JOptionPane.ERROR_MESSAGE);
-                    flag = false;
-                    break;
+                    trivflag = true;
                 }
-            }
-            if(flag)
-            {
-                for(String rightattr : right)
+                else
                 {
                     Vector<ArrayList<String>> dep = new Vector<>();
                     dep.add(left);
                     ArrayList<String> temp = new ArrayList<>();
                     temp.add(rightattr);
                     dep.add(temp);
-                    if(dependency.contains(dep))
+                    if(!dependency.contains(dep))
                     {
-                        JOptionPane.showMessageDialog(null, "Dependency already present!", "Add Functional Dependency", JOptionPane.WARNING_MESSAGE);
-                    }
-                    else
-                    {
+                        addflag = true;
                         dependency.add(dep);
                         jList1.clearSelection();
                         jList2.clearSelection();
                         Utility.printDependencies(this);
                     }
                 }
+            }
+            if(!trivflag && !addflag)
+            {
+                JOptionPane.showMessageDialog(null, "Dependencies already present\nNo dependency added", "Add Functional Dependency", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else if(trivflag && !addflag)
+            {
+                JOptionPane.showMessageDialog(null, "All dependencies are trivial or already present\nNo dependency added", "Add Functional Dependency", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else if(trivflag && addflag)
+            {
+                JOptionPane.showMessageDialog(null, "Trivial dependencies not added\nOther dependencies added", "Add Functional Dependency", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Dependencies added", "Add Functional Dependency", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }//GEN-LAST:event_jButton11ActionPerformed
