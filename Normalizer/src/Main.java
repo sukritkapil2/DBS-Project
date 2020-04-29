@@ -712,7 +712,7 @@ public class Main extends javax.swing.JFrame
         jTextArea4.setBackground(new java.awt.Color(255, 153, 153));
         jTextArea4.setColumns(19);
         jTextArea4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTextArea4.setRows(5);
+        jTextArea4.setRows(4);
         jScrollPane4.setViewportView(jTextArea4);
 
         jLabel6.setFont(new java.awt.Font("Maiandra GD", 1, 18)); // NOI18N
@@ -1126,20 +1126,24 @@ public class Main extends javax.swing.JFrame
         }
     }//GEN-LAST:event_jButton16ActionPerformed
 
-    public static void main(String args[]) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+    public static void main(String args[])
+    {
+        try
+        {
+            for(javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+        }
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex)
+        {
             java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        java.awt.EventQueue.invokeLater(() -> {
-            new Main().setVisible(true);
-        });
+        java.awt.EventQueue.invokeLater(() -> {new Main().setVisible(true);});
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
