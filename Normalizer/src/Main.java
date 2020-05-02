@@ -6,6 +6,10 @@
  */
 
 import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -24,6 +28,16 @@ public class Main extends javax.swing.JFrame
         this.listmodel = new DefaultListModel();
         this.box = new Vector<>();
         this.attribute = new ArrayList<>();
+        this.ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        try
+        {
+            File projDir = new File(".").getParentFile();
+            File srcDir = new File(projDir, "src");
+            File fontFile = new File(srcDir, "ROGFonts-Regular.ttf");;
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, fontFile));
+        }
+        catch(FontFormatException | IOException e)
+        {}
         initComponents();
     }
     @SuppressWarnings("unchecked")
@@ -804,8 +818,9 @@ public class Main extends javax.swing.JFrame
     public Vector<Vector<ArrayList<String>>> dependency;
     public Vector<Vector<ArrayList<String>>> closure;
     public Vector<ArrayList<String>> keys;
-    public Vector<JCheckBox> box;
-    public DefaultListModel listmodel;
+    private Vector<JCheckBox> box;
+    private DefaultListModel listmodel;
+    private GraphicsEnvironment ge;
     
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if(attribute.isEmpty())
@@ -1152,60 +1167,60 @@ public class Main extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton jButton1;
-    public javax.swing.JButton jButton10;
-    public javax.swing.JButton jButton11;
-    public javax.swing.JButton jButton12;
-    public javax.swing.JButton jButton13;
-    public javax.swing.JButton jButton14;
-    public javax.swing.JButton jButton15;
-    public javax.swing.JButton jButton16;
-    public javax.swing.JButton jButton2;
-    public javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     public javax.swing.JButton jButton4;
-    public javax.swing.JButton jButton5;
-    public javax.swing.JButton jButton6;
-    public javax.swing.JButton jButton7;
-    public javax.swing.JButton jButton8;
-    public javax.swing.JButton jButton9;
-    public javax.swing.JDialog jDialog1;
-    public javax.swing.JDialog jDialog2;
-    public javax.swing.JDialog jDialog3;
-    public javax.swing.JLabel jLabel1;
-    public javax.swing.JLabel jLabel2;
-    public javax.swing.JLabel jLabel3;
-    public javax.swing.JLabel jLabel4;
-    public javax.swing.JLabel jLabel5;
-    public javax.swing.JLabel jLabel6;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog jDialog2;
+    private javax.swing.JDialog jDialog3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     public javax.swing.JLabel jLabel7;
-    public javax.swing.JLabel jLabel8;
-    public javax.swing.JLabel jLabel9;
-    public javax.swing.JList<String> jList1;
-    public javax.swing.JList<String> jList2;
-    public javax.swing.JPanel jPanel1;
-    public javax.swing.JPanel jPanel10;
-    public javax.swing.JPanel jPanel11;
-    public javax.swing.JPanel jPanel12;
-    public javax.swing.JPanel jPanel13;
-    public javax.swing.JPanel jPanel14;
-    public javax.swing.JPanel jPanel15;
-    public javax.swing.JPanel jPanel16;
-    public javax.swing.JPanel jPanel2;
-    public javax.swing.JPanel jPanel3;
-    public javax.swing.JPanel jPanel4;
-    public javax.swing.JPanel jPanel5;
-    public javax.swing.JPanel jPanel6;
-    public javax.swing.JPanel jPanel7;
-    public javax.swing.JPanel jPanel8;
-    public javax.swing.JPanel jPanel9;
-    public javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JScrollPane jScrollPane2;
-    public javax.swing.JScrollPane jScrollPane3;
-    public javax.swing.JScrollPane jScrollPane4;
-    public javax.swing.JScrollPane jScrollPane5;
-    public javax.swing.JScrollPane jScrollPane6;
-    public javax.swing.JScrollPane jScrollPane7;
-    public javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     public javax.swing.JTextArea jTextArea1;
     public javax.swing.JTextArea jTextArea2;
     public javax.swing.JTextArea jTextArea3;
