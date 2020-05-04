@@ -5,6 +5,8 @@
  * @author sukrit
  */
 
+import java.util.Vector;
+
 public class Utility
 {
     public static String toBinary(int num, int size)
@@ -35,5 +37,18 @@ public class Utility
     public static int hash(int key)
     {
         return key % 16;
+    }
+    
+    public static int longest(Vector<String> vector)
+    {
+        int longest = 0;
+        for(String str : vector)
+        {
+            if(str.length() > longest)
+            {
+                longest = str.length();
+            }
+        }
+        return longest;
     }
 }

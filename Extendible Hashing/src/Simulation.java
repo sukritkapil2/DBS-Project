@@ -10,41 +10,54 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.Vector;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Simulation extends javax.swing.JFrame
 {
-    private final int gd;
-    private final int ld;
+    private final JFrame parent;
+    private int gd;
+    private Vector<String> buckets;
     private final int bfr;
     private final GlassPane gp;
     private final Vector<Vector<Vector<JPanel>>> map;
     private int key;
     private String keyStr;
     private boolean flag;
+    private String overflow;
+    private final Vector<Integer> keys;
     private final Timer timer1;
     private final Timer timer2;
     private final Timer timer3;
     private final Timer timer4;
     private Vector<Vector<JPanel>> link;
     private final int DELAY = 500;
-    
-    public Simulation(int gd, int ld, int bfr)
+        
+    public Simulation(int gd, Vector<String> buckets, int bfr, Vector<Integer> keys, JFrame parent)
     {
+        this.setVisible(true);
+        this.parent = parent;
+        this.parent.dispose();
         this.gd = gd;
-        this.ld = ld;
+        this.buckets = buckets;
         this.bfr = bfr;
         this.map = new Vector<>();
         this.gp = new GlassPane();
+        this.keys = keys;
         this.flag = false;
+        this.overflow = null;
         this.timer4 = new Timer(DELAY, (ActionEvent e) -> {simulation4();});
         this.timer4.setRepeats(false);
         this.timer3 = new Timer(DELAY, (ActionEvent e) -> {
             if(simulation3())
             {
                 timer4.start();
+                if(flag)
+                {
+                    simulateNew();
+                }
             }
         });
         this.timer3.setRepeats(false);
@@ -68,6 +81,7 @@ public class Simulation extends javax.swing.JFrame
         this.constructDirectories();
         this.constructBlocks();
         this.createMap();
+        this.addKeys();
     }
     
     @SuppressWarnings("unchecked")
@@ -275,13 +289,13 @@ public class Simulation extends javax.swing.JFrame
     
     private void constructBlocks()
     {
-        int maxld = 1 << ld;
+        int maxld = buckets.size();
         Dimension size = jPanel6.getSize();
         size = new Dimension(size.width / (bfr + 1), size.height / maxld);
-        for(int i = 0; i < maxld; i++)
+        for(String bucketText : buckets)
         {
             JPanel panel1 = new JPanel(new GridLayout(1, 1));
-            RectangleText rect = new RectangleText(Utility.toBinary(i, ld), Color.RED, size);
+            RectangleText rect = new RectangleText(bucketText, Color.RED, size);
             panel1.add(rect);
             jPanel6.add(panel1);
             for(int j = 0; j < bfr; j++)
@@ -296,7 +310,7 @@ public class Simulation extends javax.swing.JFrame
     private void createMap()
     {
         int maxgd = 1 << gd;
-        int maxld = 1 << ld;
+        int maxld = buckets.size();
         for(int i = 0; i < maxgd; i++)
         {
             JPanel dir = (JPanel) jPanel5.getComponent(2 * i);
@@ -328,15 +342,36 @@ public class Simulation extends javax.swing.JFrame
         }
     }
     
+    private void addKeys()
+    {
+        for(int x : keys)
+        {
+            key = x;
+            keyStr = Utility.toBinary(key, 4);
+            simulation1();
+            simulation2();
+            simulation3();
+            simulation4();
+            if(flag)
+            {
+                break;
+            }
+        }
+        if(flag)
+        {
+            simulateNew();
+        }
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try
         {
             String str = JOptionPane.showInputDialog(null, "Enter key to add", "Add key", JOptionPane.QUESTION_MESSAGE);
             key = Integer.parseInt(str);
-            jLabel2.setText("Key entered: " + str);
-            jLabel2.setVisible(true);
             int out = Utility.hash(key);
             keyStr = Utility.toBinary(out, 4);
+            jLabel2.setText("Key entered: " + str + " (" + keyStr + ")");
+            jLabel2.setVisible(true);
             jButton1.setText("Change Key");
             jButton2.setVisible(true);
         }
@@ -347,6 +382,7 @@ public class Simulation extends javax.swing.JFrame
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        keys.add(key);
         timer1.start();
     }//GEN-LAST:event_jButton2ActionPerformed
        
@@ -394,10 +430,14 @@ public class Simulation extends javax.swing.JFrame
             {
                 block.add(new RectangleText(String.valueOf(key), rt.getDimension()), 0);
                 block.remove(1);
-                flag = true;
-                break;
+                flag = false;
+                return true;
             }
-        } 
+        }
+        JPanel block = blocks.get(0);
+        RectangleText rt = (RectangleText) block.getComponent(0);
+        overflow = rt.getString();
+        flag = true;
         return true;
     }
         
@@ -406,6 +446,57 @@ public class Simulation extends javax.swing.JFrame
         jButton1.setText("Enter key");
         jButton1.setVisible(true);
         jLabel2.setVisible(false);
+    }
+    
+    public void simulateNew()
+    {
+        Vector<String> copy = (Vector<String>) buckets.clone();
+        JOptionPane.showMessageDialog(null, "Overflow condition reached.\nSplitting bucket " + overflow, "Overflow", JOptionPane.INFORMATION_MESSAGE);
+        int index = buckets.indexOf(overflow);
+        if(index == -1)
+        {
+            simulation2();
+            simulation4();
+        }
+        else
+        {
+            int longest = Utility.longest(buckets);
+            if(longest <= 4)
+            {
+                buckets.remove(overflow);
+                buckets.add(index, "1" + overflow);
+                buckets.add(index, "0" + overflow);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Local depth greater than 4\nKey cannot be added.\n(Local depth = " + longest + ")", "Overflow", JOptionPane.INFORMATION_MESSAGE);
+                keys.remove(keys.size() - 1);
+                System.out.println(buckets);
+                System.out.println(overflow);
+                System.out.println(keys);
+                return;
+            }
+            longest = Utility.longest(buckets);
+            if(longest > 4)
+            {
+                JOptionPane.showMessageDialog(null, "Local depth greater than 4\nKey cannot be added.\n(Local depth = " + longest + ")", "Overflow", JOptionPane.INFORMATION_MESSAGE);
+                buckets = copy;
+                System.out.println(keys);
+                keys.remove(keys.size() - 1);
+                System.out.println(keys);
+                System.out.println(buckets);
+                System.out.println(overflow);
+                simulation2();
+                simulation4();
+                return;
+            }
+            else if(longest > gd)
+            {
+                JOptionPane.showMessageDialog(null, "Local depth exceeded global depth.\nGlobal depth increased\n(Local depth = " + longest + ", Global depth = " + gd + ")", "Overflow", JOptionPane.INFORMATION_MESSAGE);
+                gd = longest;
+            }
+            Simulation simulation = new Simulation(gd, buckets, bfr, keys, this);
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

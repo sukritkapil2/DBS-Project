@@ -10,6 +10,7 @@ import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 
 public class Main extends javax.swing.JFrame
@@ -217,8 +218,13 @@ public class Main extends javax.swing.JFrame
                 JOptionPane.showMessageDialog(null, "BFr out of range.\nPlease enter BFr between 1 and 8.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            new Simulation(gd, ld, bfr).setVisible(true);
-            this.dispose();
+            int maxld = 1 << ld;
+            Vector<String> buckets = new Vector<>();
+            for(int i = 0; i < maxld; i++)
+            {
+                buckets.add(Utility.toBinary(i, ld));
+            }
+            Simulation simulation = new Simulation(gd, buckets, bfr, new Vector<>(), this);
         }
         catch(NumberFormatException e)
         {
