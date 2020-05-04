@@ -20,6 +20,14 @@ import javax.swing.JOptionPane;
 
 public class Main extends javax.swing.JFrame
 {
+    public ArrayList<String> attribute;
+    public Vector<Vector<ArrayList<String>>> dependency;
+    public Vector<Vector<ArrayList<String>>> closure;
+    public Vector<ArrayList<String>> keys;
+    private Vector<JCheckBox> box;
+    private DefaultListModel listmodel;
+    private GraphicsEnvironment ge;
+    
     public Main()
     {
         this.keys = new Vector<>();
@@ -33,7 +41,7 @@ public class Main extends javax.swing.JFrame
         {
             File projDir = new File(".").getParentFile();
             File srcDir = new File(projDir, "src");
-            File fontFile = new File(srcDir, "ROGFonts-Regular.ttf");;
+            File fontFile = new File(srcDir, "ROGFonts-Regular.ttf");
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, fontFile));
         }
         catch(FontFormatException | IOException e)
@@ -813,14 +821,6 @@ public class Main extends javax.swing.JFrame
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    public ArrayList<String> attribute;
-    public Vector<Vector<ArrayList<String>>> dependency;
-    public Vector<Vector<ArrayList<String>>> closure;
-    public Vector<ArrayList<String>> keys;
-    private Vector<JCheckBox> box;
-    private DefaultListModel listmodel;
-    private GraphicsEnvironment ge;
     
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if(attribute.isEmpty())

@@ -100,18 +100,18 @@ public class Utility
         switch(min)
         {
             case 1:
-                obj.jTextArea3.append("Decomposing to 2nd NF\n");
+                obj.jTextArea3.append("Decomposing to 2nd NF:\n");
                 Utility.decompose(obj, "1");
                 break;
             case 2:
                 if(obj.jButton4.getText().equals("Normalize further"))
                 {
                     obj.jTextArea3.append("\n\n");
-                    obj.jTextArea3.append("Decomposing last relation to 3rd NF\n");
+                    obj.jTextArea3.append("Decomposing last relation to 3rd NF:\n");
                 }
                 else
                 {
-                    obj.jTextArea3.append("Decomposing to 3rd NF\n");
+                    obj.jTextArea3.append("Decomposing to 3rd NF:\n");
                 }
                 Utility.decompose(obj, "2");
                 break;
@@ -119,13 +119,14 @@ public class Utility
                 if(obj.jButton4.getText().equals("Normalize further"))
                 {
                     obj.jTextArea3.append("\n\n");
-                    obj.jTextArea3.append("Decomposing last relation to BCNF\n");
+                    obj.jTextArea3.append("Decomposing last relation to BCNF:\n");
                 }
                 else
                 {
-                    obj.jTextArea3.append("Decomposing to BCNF\n");
+                    obj.jTextArea3.append("Decomposing to BCNF:\n");
                 }
                 Utility.decompose(obj, "3");
+                obj.jButton4.setVisible(false);
                 break;
             default:
                 if(obj.jButton4.getText().equals("Normalize further"))
@@ -256,14 +257,18 @@ public class Utility
     {
         ArrayList<String> left = dep.get(0);
         ArrayList<String> right = dep.get(1);
-        if(!obj.keys.contains(right))
+        for(ArrayList<String> key : obj.keys)
         {
-            for(ArrayList<String> key : obj.keys)
+            if(key.contains(right.get(0)))
             {
-                if(key.containsAll(left) && !left.containsAll(key))
-                {
-                    return false;
-                }
+                return true;
+            }
+        }
+        for(ArrayList<String> key : obj.keys)
+        {
+            if(key.containsAll(left) && !left.containsAll(key))
+            {
+                return false;
             }
         }
         return true;
