@@ -8,8 +8,11 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class Simulation extends javax.swing.JFrame
 {
@@ -17,20 +20,54 @@ public class Simulation extends javax.swing.JFrame
     private final int ld;
     private final int bfr;
     private final GlassPane gp;
-    //private final 
+    private final Vector<Vector<Vector<JPanel>>> map;
+    private int key;
+    private String keyStr;
+    private boolean flag;
+    private final Timer timer1;
+    private final Timer timer2;
+    private final Timer timer3;
+    private final Timer timer4;
+    private Vector<Vector<JPanel>> link;
+    private final int DELAY = 500;
     
     public Simulation(int gd, int ld, int bfr)
     {
         this.gd = gd;
         this.ld = ld;
         this.bfr = bfr;
-        gp = new GlassPane();
+        this.map = new Vector<>();
+        this.gp = new GlassPane();
+        this.flag = false;
+        this.timer4 = new Timer(DELAY, (ActionEvent e) -> {simulation4();});
+        this.timer4.setRepeats(false);
+        this.timer3 = new Timer(DELAY, (ActionEvent e) -> {
+            if(simulation3())
+            {
+                timer4.start();
+            }
+        });
+        this.timer3.setRepeats(false);
+        this.timer2 = new Timer(DELAY, (ActionEvent e) -> {
+            if(simulation2())
+            {
+                timer3.start();
+            }
+        });
+        this.timer2.setRepeats(false);
+        this.timer1 = new Timer(DELAY, (ActionEvent e) -> {
+            if(simulation1())
+            {
+                timer2.start();
+            }
+        });
+        this.timer1.setRepeats(false);
         initComponents();
         this.setGlassPane(gp);
-        gp.setVisible(true);
-        constructDirectories();
-        constructBlocks();
-        constructLines();
+        this.gp.setVisible(true);
+        this.constructDirectories();
+        this.constructBlocks();
+        this.createMap();
     }
     
     @SuppressWarnings("unchecked")
@@ -41,11 +78,13 @@ public class Simulation extends javax.swing.JFrame
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -87,12 +126,29 @@ public class Simulation extends javax.swing.JFrame
             }
         });
 
+        jLabel2.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel2.setFont(new java.awt.Font("Maiandra GD", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Key entered:");
+        jLabel2.setVisible(false);
+
+        jButton2.setBackground(new java.awt.Color(0, 0, 51));
+        jButton2.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Simulate");
+        jButton2.setVisible(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         jPanel3.setPreferredSize(new java.awt.Dimension(412, 427));
 
-        jLabel2.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
-        jLabel2.setText("<HTML><U>Directories</U></HTML>");
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel3.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        jLabel3.setText("<HTML><U>Directories</U></HTML>");
+        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPanel5.setLayout(new java.awt.GridLayout(0, 2));
 
@@ -102,7 +158,7 @@ public class Simulation extends javax.swing.JFrame
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(52, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(53, Short.MAX_VALUE))
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -110,17 +166,17 @@ public class Simulation extends javax.swing.JFrame
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel4.setPreferredSize(new java.awt.Dimension(412, 427));
 
-        jLabel3.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
-        jLabel3.setText("<HTML><U>Data Buckets</U></HTML>");
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel4.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        jLabel4.setText("<HTML><U>Data Buckets</U></HTML>");
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPanel6.setLayout(new java.awt.GridLayout(0, bfr + 1));
 
@@ -130,7 +186,7 @@ public class Simulation extends javax.swing.JFrame
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(303, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(304, Short.MAX_VALUE))
             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -138,9 +194,9 @@ public class Simulation extends javax.swing.JFrame
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -148,27 +204,35 @@ public class Simulation extends javax.swing.JFrame
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(484, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(0, 475, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -229,7 +293,7 @@ public class Simulation extends javax.swing.JFrame
         }
     }
     
-    private void constructLines()
+    private void createMap()
     {
         int maxgd = 1 << gd;
         int maxld = 1 << ld;
@@ -237,17 +301,30 @@ public class Simulation extends javax.swing.JFrame
         {
             JPanel dir = (JPanel) jPanel5.getComponent(2 * i);
             RectangleText rect = (RectangleText) dir.getComponent(0);
+            JPanel dir2 = (JPanel) jPanel5.getComponent(2 * i + 1);
+            Vector<Vector<JPanel>> lnk = new Vector<>();
+            Vector<JPanel> vd = new Vector<>();
+            vd.add(dir);
+            vd.add(dir2);
+            lnk.add(vd);
             for(int j = 0; j < maxld; j++)
             {
                 JPanel block = (JPanel) jPanel6.getComponent((bfr + 1) * j);
                 RectangleText rt = (RectangleText) block.getComponent(0);
                 if(rect.getString().endsWith(rt.getString()))
                 {
-                    JPanel dir2 = (JPanel) jPanel5.getComponent(2 * i + 1);
-                    RectangleText r = (RectangleText) dir2.getComponent(0);
-                    gp.link(r, rt);
+                    gp.link(dir2, block);
+                    Vector<JPanel> vb = new Vector<>();
+                    vb.add(block);
+                    for(int k = 1; k <= bfr; k++)
+                    {
+                        JPanel p = (JPanel) jPanel6.getComponent((bfr + 1) * j + k);
+                        vb.add(p);
+                    }
+                    lnk.add(vb);
                 }
             }
+            map.add(lnk);
         }
     }
     
@@ -255,22 +332,89 @@ public class Simulation extends javax.swing.JFrame
         try
         {
             String str = JOptionPane.showInputDialog(null, "Enter key to add", "Add key", JOptionPane.QUESTION_MESSAGE);
-            int key = Integer.parseInt(str);
+            key = Integer.parseInt(str);
+            jLabel2.setText("Key entered: " + str);
+            jLabel2.setVisible(true);
             int out = Utility.hash(key);
-            String bin = Utility.toBinary(out, gd);
-            
+            keyStr = Utility.toBinary(out, 4);
+            jButton1.setText("Change Key");
+            jButton2.setVisible(true);
         }
         catch(NumberFormatException e)
         {
             JOptionPane.showMessageDialog(null, "Please enter valid numeric key", "Key error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        timer1.start();
+    }//GEN-LAST:event_jButton2ActionPerformed
+       
+    private boolean simulation1()
+    {
+        jButton1.setVisible(false);
+        jButton2.setVisible(false);
+        for(Vector<Vector<JPanel>> lnk : map)
+        {
+            Vector<JPanel> dir = lnk.get(0);
+            JPanel textPanel = dir.get(0);
+            RectangleText rect = (RectangleText) textPanel.getComponent(0);
+            if(keyStr.endsWith(rect.getString()))
+            {
+                link = lnk;
+                break;
+            }
+        }
+        Vector<JPanel> dir = link.get(0);
+        JPanel linkPanel = dir.get(1);
+        RectangleText rect = (RectangleText) linkPanel.getComponent(0);
+        linkPanel.add(new RectangleText(String.valueOf(key), Color.BLUE, rect.getDimension()), 0);
+        linkPanel.remove(1);
+        return true;
+    }
+    
+    public boolean simulation2()
+    {
+        Vector<JPanel> dir = link.get(0);
+        JPanel linkPanel = dir.get(1);
+        RectangleText rect = (RectangleText) linkPanel.getComponent(0);
+        linkPanel.add(new RectangleText(rect.getDimension()), 0);
+        linkPanel.remove(1);
+        return true;
+    }
+    
+    public boolean simulation3()
+    {
+        Vector<JPanel> blocks = link.get(1);
+        for(JPanel block : blocks)
+        {
+            RectangleText rt = (RectangleText) block.getComponent(0);
+            String str = rt.getString();
+            if(str == null)
+            {
+                block.add(new RectangleText(String.valueOf(key), rt.getDimension()), 0);
+                block.remove(1);
+                flag = true;
+                break;
+            }
+        } 
+        return true;
+    }
+        
+    public void simulation4()
+    {
+        jButton1.setText("Enter key");
+        jButton1.setVisible(true);
+        jLabel2.setVisible(false);
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

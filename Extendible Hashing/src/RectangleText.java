@@ -61,4 +61,14 @@ public class RectangleText extends javax.swing.JComponent
     {
         return str;
     }
+    
+    public Color getColor()
+    {
+        return clr;
+    }
+    
+    public Dimension getDimension()
+    {
+        return parentDim;
+    }
 }

@@ -14,13 +14,12 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.util.HashMap;
-import java.util.Map;
 import javax.swing.JComponent;
 import javax.swing.JRootPane;
 
 public class GlassPane extends javax.swing.JComponent
 {
-    private final Map<JComponent, JComponent> linked;
+    private final HashMap<JComponent, JComponent> linked;
 
     public GlassPane()
     {
