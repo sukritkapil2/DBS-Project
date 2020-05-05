@@ -37,15 +37,28 @@ public class Main extends javax.swing.JFrame
         this.box = new Vector<>();
         this.attribute = new ArrayList<>();
         this.ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        File dir = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath());
         try
         {
-            File projDir = new File(".").getParentFile();
-            File srcDir = new File(projDir, "src");
-            File fontFile = new File(srcDir, "ROGFonts-Regular.ttf");
+            File fontFile = new File(dir, "ROGFonts-Regular.ttf");
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, fontFile));
         }
         catch(FontFormatException | IOException e)
-        {}
+        {
+            while(dir != null)
+            {
+                try
+                {
+                    dir = dir.getParentFile();
+                    File srcDir = new File(dir, "src");
+                    File fontFile = new File(srcDir, "ROGFonts-Regular.ttf");
+                    ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, fontFile));
+                    break;
+                }
+                catch(FontFormatException | IOException ex)
+                {}
+            }
+        }
         initComponents();
     }
     @SuppressWarnings("unchecked")
