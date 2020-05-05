@@ -19,16 +19,29 @@ public class Main extends javax.swing.JFrame
     
     public Main()
     {
-        ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        this.ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        File dir = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath());
         try
         {
-            File projDir = new File(".").getParentFile();
-            File srcDir = new File(projDir, "src");
-            File fontFile = new File(srcDir, "ROGFonts-Regular.ttf");
+            File fontFile = new File(dir, "ROGFonts-Regular.ttf");
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, fontFile));
         }
         catch(FontFormatException | IOException e)
-        {}
+        {
+            while(dir != null)
+            {
+                try
+                {
+                    dir = dir.getParentFile();
+                    File srcDir = new File(dir, "src");
+                    File fontFile = new File(srcDir, "ROGFonts-Regular.ttf");
+                    ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, fontFile));
+                    break;
+                }
+                catch(FontFormatException | IOException ex)
+                {}
+            }
+        }
         initComponents();
     }
     @SuppressWarnings("unchecked")
@@ -213,9 +226,9 @@ public class Main extends javax.swing.JFrame
                 gd = ld;
             }
             int bfr = Integer.parseInt(jTextField3.getText());
-            if(bfr < 1 || bfr > 8)
+            if(bfr < 1 || bfr > 7)
             {
-                JOptionPane.showMessageDialog(null, "BFr out of range.\nPlease enter BFr between 1 and 8.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "BFr out of range.\nPlease enter BFr between 1 and 7.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             int maxld = 1 << ld;

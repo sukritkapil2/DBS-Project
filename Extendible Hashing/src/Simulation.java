@@ -18,7 +18,7 @@ import javax.swing.Timer;
 public class Simulation extends javax.swing.JFrame
 {
     private final JFrame parent;
-    private int gd;
+    private final int gd;
     private Vector<String> buckets;
     private final int bfr;
     private final GlassPane gp;
@@ -33,7 +33,7 @@ public class Simulation extends javax.swing.JFrame
     private final Timer timer3;
     private final Timer timer4;
     private Vector<Vector<JPanel>> link;
-    private final int DELAY = 500;
+    private final int DELAY = 700;
         
     public Simulation(int gd, Vector<String> buckets, int bfr, Vector<Integer> keys, JFrame parent)
     {
@@ -150,7 +150,6 @@ public class Simulation extends javax.swing.JFrame
         jButton2.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Simulate");
-        jButton2.setVisible(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -250,6 +249,8 @@ public class Simulation extends javax.swing.JFrame
                 .addContainerGap())
         );
 
+        jButton2.setVisible(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -344,22 +345,21 @@ public class Simulation extends javax.swing.JFrame
     
     private void addKeys()
     {
-        for(int x : keys)
+        for(int i = 0; i < keys.size() - 1; i++)
         {
+            int x = keys.get(i);
             key = x;
             keyStr = Utility.toBinary(key, 4);
             simulation1();
             simulation2();
             simulation3();
             simulation4();
-            if(flag)
-            {
-                break;
-            }
         }
-        if(flag)
+        if(!keys.isEmpty())
         {
-            simulateNew();
+            key = keys.get(keys.size() - 1);
+            keyStr = Utility.toBinary(key, 4);
+            timer1.start();
         }
     }
     
@@ -450,53 +450,29 @@ public class Simulation extends javax.swing.JFrame
     
     public void simulateNew()
     {
+        int newgd = gd;
         Vector<String> copy = (Vector<String>) buckets.clone();
         JOptionPane.showMessageDialog(null, "Overflow condition reached.\nSplitting bucket " + overflow, "Overflow", JOptionPane.INFORMATION_MESSAGE);
         int index = buckets.indexOf(overflow);
-        if(index == -1)
+        buckets.remove(overflow);
+        buckets.add(index, "1" + overflow);
+        buckets.add(index, "0" + overflow);
+        int longest = Utility.longest(buckets);
+        if(longest > 4)
         {
+            JOptionPane.showMessageDialog(null, "Local depth greater than 4\nKey cannot be added.\n(Local depth = " + longest + ")", "Overflow", JOptionPane.INFORMATION_MESSAGE);
+            buckets = copy;
+            keys.remove(keys.size() - 1);
             simulation2();
             simulation4();
+            return;
         }
-        else
+        else if(longest > newgd)
         {
-            int longest = Utility.longest(buckets);
-            if(longest <= 4)
-            {
-                buckets.remove(overflow);
-                buckets.add(index, "1" + overflow);
-                buckets.add(index, "0" + overflow);
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Local depth greater than 4\nKey cannot be added.\n(Local depth = " + longest + ")", "Overflow", JOptionPane.INFORMATION_MESSAGE);
-                keys.remove(keys.size() - 1);
-                System.out.println(buckets);
-                System.out.println(overflow);
-                System.out.println(keys);
-                return;
-            }
-            longest = Utility.longest(buckets);
-            if(longest > 4)
-            {
-                JOptionPane.showMessageDialog(null, "Local depth greater than 4\nKey cannot be added.\n(Local depth = " + longest + ")", "Overflow", JOptionPane.INFORMATION_MESSAGE);
-                buckets = copy;
-                System.out.println(keys);
-                keys.remove(keys.size() - 1);
-                System.out.println(keys);
-                System.out.println(buckets);
-                System.out.println(overflow);
-                simulation2();
-                simulation4();
-                return;
-            }
-            else if(longest > gd)
-            {
-                JOptionPane.showMessageDialog(null, "Local depth exceeded global depth.\nGlobal depth increased\n(Local depth = " + longest + ", Global depth = " + gd + ")", "Overflow", JOptionPane.INFORMATION_MESSAGE);
-                gd = longest;
-            }
-            Simulation simulation = new Simulation(gd, buckets, bfr, keys, this);
+            JOptionPane.showMessageDialog(null, "Local depth exceeded global depth.\nGlobal depth increased\n(Local depth = " + longest + ", Global depth = " + gd + ")", "Overflow", JOptionPane.INFORMATION_MESSAGE);
+            newgd = longest;
         }
+        Simulation simulation = new Simulation(newgd, buckets, bfr, keys, this);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
