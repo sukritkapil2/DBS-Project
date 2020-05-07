@@ -44,7 +44,11 @@ public class Main extends javax.swing.JFrame
         }
         initComponents();
     }
+<<<<<<< Updated upstream
     @SuppressWarnings("unchecked")
+=======
+
+>>>>>>> Stashed changes
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 

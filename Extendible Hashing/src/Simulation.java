@@ -28,10 +28,20 @@ public class Simulation extends javax.swing.JFrame
     private boolean flag;
     private String overflow;
     private final Vector<Integer> keys;
+<<<<<<< Updated upstream
     private final Timer timer1;
     private final Timer timer2;
     private final Timer timer3;
     private final Timer timer4;
+=======
+    private final Timer addTimer1;
+    private final Timer addTimer2;
+    private final Timer addTimer3;
+    private final Timer addTimer4;
+    private final Timer searchTimer1;
+    private final Timer searchTimer2;
+    private final Timer searchTimer3;
+>>>>>>> Stashed changes
     private Vector<Vector<JPanel>> link;
     private final int DELAY = 700;
         
@@ -48,18 +58,28 @@ public class Simulation extends javax.swing.JFrame
         this.keys = keys;
         this.flag = false;
         this.overflow = null;
+<<<<<<< Updated upstream
         this.timer4 = new Timer(DELAY, (ActionEvent e) -> {simulation4();});
         this.timer4.setRepeats(false);
         this.timer3 = new Timer(DELAY, (ActionEvent e) -> {
             if(simulation3())
             {
                 timer4.start();
+=======
+        this.addTimer4 = new Timer(DELAY, (ActionEvent e) -> {simulation4();});
+        this.addTimer4.setRepeats(false);
+        this.addTimer3 = new Timer(DELAY, (ActionEvent e) -> {
+            if(simulation3())
+            {
+                addTimer4.start();
+>>>>>>> Stashed changes
                 if(flag)
                 {
                     simulateNew();
                 }
             }
         });
+<<<<<<< Updated upstream
         this.timer3.setRepeats(false);
         this.timer2 = new Timer(DELAY, (ActionEvent e) -> {
             if(simulation2())
@@ -75,6 +95,45 @@ public class Simulation extends javax.swing.JFrame
             }
         });
         this.timer1.setRepeats(false);
+=======
+        this.addTimer3.setRepeats(false);
+        this.addTimer2 = new Timer(DELAY, (ActionEvent e) -> {
+            if(simulation2())
+            {
+                addTimer3.start();
+            }
+        });
+        this.addTimer2.setRepeats(false);
+        this.addTimer1 = new Timer(DELAY, (ActionEvent e) -> {
+            if(simulation1(Color.BLUE))
+            {
+                addTimer2.start();
+            }
+        });
+        this.addTimer1.setRepeats(false);
+        this.searchTimer3 = new Timer(DELAY, (ActionEvent e) -> {
+            if(searchKey())
+            {
+                addTimer4.start();
+            }
+        });
+        this.searchTimer3.setRepeats(false);
+        this.searchTimer2 = new Timer(DELAY, (ActionEvent e) -> {
+            if(simulation2())
+            {
+                searchTimer3.start();
+            }
+        });
+        this.searchTimer2.setRepeats(false);
+        this.searchTimer1 = new Timer(DELAY, (ActionEvent e) -> {
+            float[] clr = Color.RGBtoHSB(37, 138, 64, null);
+            if(simulation1(Color.getHSBColor(clr[0], clr[1], clr[2])))
+            {
+                searchTimer2.start();
+            }
+        });
+        this.searchTimer1.setRepeats(false);
+>>>>>>> Stashed changes
         initComponents();
         this.setGlassPane(gp);
         this.gp.setVisible(true);
@@ -84,7 +143,10 @@ public class Simulation extends javax.swing.JFrame
         this.addKeys();
     }
     
+<<<<<<< Updated upstream
     @SuppressWarnings("unchecked")
+=======
+>>>>>>> Stashed changes
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -94,6 +156,10 @@ public class Simulation extends javax.swing.JFrame
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+<<<<<<< Updated upstream
+=======
+        jButton3 = new javax.swing.JButton();
+>>>>>>> Stashed changes
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -102,6 +168,10 @@ public class Simulation extends javax.swing.JFrame
         jPanel6 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+<<<<<<< Updated upstream
+=======
+        setTitle("Extendible Hashing");
+>>>>>>> Stashed changes
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
@@ -149,13 +219,30 @@ public class Simulation extends javax.swing.JFrame
         jButton2.setBackground(new java.awt.Color(0, 0, 51));
         jButton2.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
+<<<<<<< Updated upstream
         jButton2.setText("Simulate");
+=======
+        jButton2.setText("Add key");
+>>>>>>> Stashed changes
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
+<<<<<<< Updated upstream
+=======
+        jButton3.setBackground(new java.awt.Color(0, 0, 51));
+        jButton3.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Search key");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+>>>>>>> Stashed changes
         jPanel3.setPreferredSize(new java.awt.Dimension(412, 427));
 
         jLabel3.setBackground(new java.awt.Color(51, 51, 51));
@@ -230,6 +317,11 @@ public class Simulation extends javax.swing.JFrame
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)
+<<<<<<< Updated upstream
+=======
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3)
+>>>>>>> Stashed changes
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -241,7 +333,12 @@ public class Simulation extends javax.swing.JFrame
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+<<<<<<< Updated upstream
                         .addComponent(jButton2)))
+=======
+                        .addComponent(jButton2)
+                        .addComponent(jButton3)))
+>>>>>>> Stashed changes
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
@@ -250,6 +347,10 @@ public class Simulation extends javax.swing.JFrame
         );
 
         jButton2.setVisible(false);
+<<<<<<< Updated upstream
+=======
+        jButton3.setVisible(false);
+>>>>>>> Stashed changes
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -350,7 +451,11 @@ public class Simulation extends javax.swing.JFrame
             int x = keys.get(i);
             key = x;
             keyStr = Utility.toBinary(key, 4);
+<<<<<<< Updated upstream
             simulation1();
+=======
+            simulation1(Color.BLUE);
+>>>>>>> Stashed changes
             simulation2();
             simulation3();
             simulation4();
@@ -359,11 +464,16 @@ public class Simulation extends javax.swing.JFrame
         {
             key = keys.get(keys.size() - 1);
             keyStr = Utility.toBinary(key, 4);
+<<<<<<< Updated upstream
             timer1.start();
+=======
+            addTimer1.start();
+>>>>>>> Stashed changes
         }
     }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+<<<<<<< Updated upstream
         try
         {
             String str = JOptionPane.showInputDialog(null, "Enter key to add", "Add key", JOptionPane.QUESTION_MESSAGE);
@@ -379,10 +489,37 @@ public class Simulation extends javax.swing.JFrame
         {
             JOptionPane.showMessageDialog(null, "Please enter valid numeric key", "Key error", JOptionPane.ERROR_MESSAGE);
         }
+=======
+        while(true)
+        {
+            try
+            {
+                String str = JOptionPane.showInputDialog(null, "Enter key to add or search:", null, JOptionPane.QUESTION_MESSAGE);
+                if(str == null)
+                {
+                    break;
+                }
+                key = Integer.parseInt(str);
+                int out = Utility.hash(key);
+                keyStr = Utility.toBinary(out, 4);
+                jLabel2.setText("Key entered: " + str + " (" + keyStr + ")");
+                jLabel2.setVisible(true);
+                jButton1.setText("Change Key");
+                jButton2.setVisible(true);
+                jButton3.setVisible(true);
+                break;
+            }
+            catch(NumberFormatException e)
+            {
+                JOptionPane.showMessageDialog(null, "Please enter valid numeric key", "Key error", JOptionPane.ERROR_MESSAGE);
+            }
+        }  
+>>>>>>> Stashed changes
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         keys.add(key);
+<<<<<<< Updated upstream
         timer1.start();
     }//GEN-LAST:event_jButton2ActionPerformed
        
@@ -390,6 +527,20 @@ public class Simulation extends javax.swing.JFrame
     {
         jButton1.setVisible(false);
         jButton2.setVisible(false);
+=======
+        addTimer1.start();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        searchTimer1.start();
+    }//GEN-LAST:event_jButton3ActionPerformed
+       
+    private boolean simulation1(Color clr)
+    {
+        jButton1.setVisible(false);
+        jButton2.setVisible(false);
+        jButton3.setVisible(false);
+>>>>>>> Stashed changes
         for(Vector<Vector<JPanel>> lnk : map)
         {
             Vector<JPanel> dir = lnk.get(0);
@@ -404,7 +555,11 @@ public class Simulation extends javax.swing.JFrame
         Vector<JPanel> dir = link.get(0);
         JPanel linkPanel = dir.get(1);
         RectangleText rect = (RectangleText) linkPanel.getComponent(0);
+<<<<<<< Updated upstream
         linkPanel.add(new RectangleText(String.valueOf(key), Color.BLUE, rect.getDimension()), 0);
+=======
+        linkPanel.add(new RectangleText(String.valueOf(key), clr, rect.getDimension()), 0);
+>>>>>>> Stashed changes
         linkPanel.remove(1);
         return true;
     }
@@ -421,6 +576,19 @@ public class Simulation extends javax.swing.JFrame
     
     public boolean simulation3()
     {
+<<<<<<< Updated upstream
+=======
+        for(int i = 0; i < keys.size() - 1; i++)
+        {
+            if(keys.get(i) == key)
+            {
+                JOptionPane.showMessageDialog(null, "Key discarded.\nKey already present.", "Add key", JOptionPane.INFORMATION_MESSAGE);
+                keys.remove(keys.size() - 1);
+                flag = false;
+                return true;
+            }
+        }
+>>>>>>> Stashed changes
         Vector<JPanel> blocks = link.get(1);
         for(JPanel block : blocks)
         {
@@ -460,7 +628,11 @@ public class Simulation extends javax.swing.JFrame
         int longest = Utility.longest(buckets);
         if(longest > 4)
         {
+<<<<<<< Updated upstream
             JOptionPane.showMessageDialog(null, "Local depth greater than 4\nKey cannot be added.\n(Local depth = " + longest + ")", "Overflow", JOptionPane.INFORMATION_MESSAGE);
+=======
+            JOptionPane.showMessageDialog(null, "Local depth greater than 4\nKey discarded.\n(Local depth = " + longest + ")", "Overflow", JOptionPane.INFORMATION_MESSAGE);
+>>>>>>> Stashed changes
             buckets = copy;
             keys.remove(keys.size() - 1);
             simulation2();
@@ -475,9 +647,33 @@ public class Simulation extends javax.swing.JFrame
         Simulation simulation = new Simulation(newgd, buckets, bfr, keys, this);
     }
     
+<<<<<<< Updated upstream
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+=======
+    public boolean searchKey()
+    {
+        Vector<JPanel> bktlist = link.get(1);
+        JPanel index = bktlist.get(0);
+        RectangleText rt = (RectangleText) index.getComponent(0);
+        String bucket = rt.getString();
+        if(keys.contains(key))
+        {
+            JOptionPane.showMessageDialog(null, "Key found in bucket " + bucket, "Search key", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Key not found\n(Expected bucket: " + bucket + ")", "Search key", JOptionPane.INFORMATION_MESSAGE);
+        }
+        return true;
+    }
+    
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+>>>>>>> Stashed changes
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
