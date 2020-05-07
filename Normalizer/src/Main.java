@@ -25,7 +25,7 @@ public class Main extends javax.swing.JFrame
     public Vector<Vector<ArrayList<String>>> closure;
     public Vector<ArrayList<String>> keys;
     private Vector<JCheckBox> box;
-    private DefaultListModel listmodel;
+    private DefaultListModel<String> listmodel;
     private GraphicsEnvironment ge;
     
     public Main()
@@ -33,7 +33,7 @@ public class Main extends javax.swing.JFrame
         this.keys = new Vector<>();
         this.closure = new Vector<>();
         this.dependency = new Vector<>();
-        this.listmodel = new DefaultListModel();
+        this.listmodel = new DefaultListModel<>();
         this.box = new Vector<>();
         this.attribute = new ArrayList<>();
         this.ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -61,7 +61,7 @@ public class Main extends javax.swing.JFrame
         }
         initComponents();
     }
-    @SuppressWarnings("unchecked")
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
