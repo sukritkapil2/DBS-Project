@@ -101,7 +101,7 @@ public class Utility
         {
             case 1:
                 obj.jTextArea3.append("Decomposing to 2nd NF:\n");
-                Utility.decompose(obj, "1");
+                Utility.decompose(obj, 1);
                 break;
             case 2:
                 if(obj.jButton4.getText().equals("Normalize further"))
@@ -113,7 +113,7 @@ public class Utility
                 {
                     obj.jTextArea3.append("Decomposing to 3rd NF:\n");
                 }
-                Utility.decompose(obj, "2");
+                Utility.decompose(obj, 2);
                 break;
             case 3:
                 if(obj.jButton4.getText().equals("Normalize further"))
@@ -125,7 +125,7 @@ public class Utility
                 {
                     obj.jTextArea3.append("Decomposing to BCNF:\n");
                 }
-                Utility.decompose(obj, "3");
+                Utility.decompose(obj, 3);
                 obj.jButton4.setVisible(false);
                 break;
             default:
@@ -327,7 +327,7 @@ public class Utility
         }
     }
     
-    private static void decompose(Main obj, String nf)
+    private static void decompose(Main obj, int nf)
     {
         boolean flag;
         int i = 1;
@@ -338,7 +338,7 @@ public class Utility
             ArrayList<String> key = null;
             for(Vector<ArrayList<String>> dep : obj.dependency)
             {
-                if(dep.get(2).get(0).equals(nf))
+                if(Integer.parseInt(dep.get(2).get(0)) <= nf)
                 {
                     key = dep.get(0);
                     newTable.addAll(dep.get(0));
