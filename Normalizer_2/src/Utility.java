@@ -6,6 +6,7 @@
  */
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Vector;
 
 public class Utility
@@ -25,20 +26,32 @@ public class Utility
         obj.jTextArea2.setText(null);
         for(Vector<ArrayList<String>> dep : obj.dependency)
         {
-            boolean newline = true;
-            for(String leftattr : dep.get(0))
+            String l = "";
+            String r = "";
+            for(String attr : dep.get(0))
             {
-                if(newline)
+                if(l.isEmpty())
                 {
-                    obj.jTextArea2.append(leftattr);
-                    newline = false;
+                    l += attr;
                 }
                 else
                 {
-                    obj.jTextArea2.append(", " + leftattr);
+                    l += ", " + attr;
                 }
             }
-            obj.jTextArea2.append(" --> " + dep.get(1).get(0) + "\n");
+            for(String attr : dep.get(1))
+            {
+                if(r.isEmpty())
+                {
+                    r += attr;
+                }
+                else
+                {
+                    r += ", " + attr;
+                }
+            }
+            String s = l + " --> " + r;
+            obj.jTextArea2.append(s + "\n");
         }
     }
     
@@ -159,16 +172,29 @@ public class Utility
                     continue outer;
                 }
             }
+        }
+        obj.dependency.removeAll(val);
+        for(Vector<ArrayList<String>> dep : obj.dependency)
+        {
+            ArrayList<String> v = new ArrayList<>();
             for(String rightattr : dep.get(1))
             {
                 if(!obj.attribute.contains(rightattr))
                 {
-                    if(!val.contains(dep))
+                    if(!v.contains(rightattr))
                     {
-                        val.add(dep);
+                        v.add(rightattr);
                     }
-                    continue outer;
                 }
+            }
+            dep.get(1).removeAll(v);
+        }
+        val.clear();
+        for(Vector<ArrayList<String>> dep : obj.dependency)
+        {
+            if(dep.get(1).isEmpty())
+            {
+                val.add(dep);
             }
         }
         obj.dependency.removeAll(val);
@@ -177,13 +203,28 @@ public class Utility
     private static ArrayList<String> getDependent(Main obj, ArrayList<String> attr)
     {
         ArrayList<String> dependent = new ArrayList<>();
-        dependent.addAll(attr);
+        Vector<Integer> val = new Vector<>();
+        for(String att : attr)
+        {
+            val.add(obj.attribute.indexOf(att));
+        }
         for(Vector<ArrayList<String>> dep : obj.dependency)
         {
-            if(attr.containsAll(dep.get(0)) && !dependent.contains(dep.get(1).get(0)))
+            if(attr.containsAll(dep.get(0)))
             {
-                dependent.add(dep.get(1).get(0));
+                for(String rightattr : dep.get(1))
+                {
+                    if(!val.contains(obj.attribute.indexOf(rightattr)))
+                    {
+                        val.add(obj.attribute.indexOf(rightattr));
+                    }
+                }
             }
+        }
+        Collections.sort(val);
+        for(int i : val)
+        {
+            dependent.add(obj.attribute.get(i));
         }
         return dependent;
     }
@@ -257,18 +298,27 @@ public class Utility
     {
         ArrayList<String> left = dep.get(0);
         ArrayList<String> right = dep.get(1);
-        for(ArrayList<String> key : obj.keys)
+        boolean flag = false;
+        outer : for(String rightattr : right)
         {
-            if(key.contains(right.get(0)))
+            for(ArrayList<String> key : obj.keys)
             {
-                return true;
+                if(key.contains(rightattr))
+                {
+                    continue outer;
+                }
             }
+            flag = true;
+            break;
         }
-        for(ArrayList<String> key : obj.keys)
+        if(flag)
         {
-            if(key.containsAll(left) && !left.containsAll(key))
+            for(ArrayList<String> key : obj.keys)
             {
-                return false;
+                if(key.containsAll(left) && !left.containsAll(key))
+                {
+                    return false;
+                }
             }
         }
         return true;
@@ -285,14 +335,18 @@ public class Utility
                 return true;
             }
         }
-        for(ArrayList<String> key : obj.keys)
+        outer : for(String rightattr : right)
         {
-            if(key.contains(right.get(0)))
+            for(ArrayList<String> key : obj.keys)
             {
-                return true;
+                if(key.contains(rightattr))
+                {
+                    continue outer;
+                }
             }
+            return false;
         }
-        return false;
+        return true;
     }
     
     private static boolean isBCNF(Main obj, Vector<ArrayList<String>> dep)
@@ -352,8 +406,8 @@ public class Utility
                 {
                     key = dep.get(0);
                     newTable.addAll(dep.get(0));
-                    newTable.add(dep.get(1).get(0));
-                    obj.attribute.remove(dep.get(1).get(0));
+                    newTable.addAll(dep.get(1));
+                    obj.attribute.removeAll(dep.get(1));
                     flag = true;
                     break;
                 }

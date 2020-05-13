@@ -11,6 +11,7 @@ import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -949,48 +950,59 @@ public class Main extends javax.swing.JFrame
         }
         else
         {
-            boolean trivflag = false;
-            boolean addflag = false;
             ArrayList<String> left = (ArrayList<String>) jList1.getSelectedValuesList();
             ArrayList<String> right = (ArrayList<String>) jList2.getSelectedValuesList();
-            for(String rightattr : right)
+            right.removeAll(left);
+            if(right.isEmpty())
             {
-                if(left.contains(rightattr))
-                {
-                    trivflag = true;
-                }
-                else
-                {
-                    Vector<ArrayList<String>> dep = new Vector<>();
-                    dep.add(left);
-                    ArrayList<String> temp = new ArrayList<>();
-                    temp.add(rightattr);
-                    dep.add(temp);
-                    if(!dependency.contains(dep))
-                    {
-                        addflag = true;
-                        dependency.add(dep);
-                        jList1.clearSelection();
-                        jList2.clearSelection();
-                        Utility.printDependencies(this);
-                    }
-                }
-            }
-            if(!trivflag && !addflag)
-            {
-                JOptionPane.showMessageDialog(null, "Dependencies already present\nNo dependency added", "Add Functional Dependency", JOptionPane.INFORMATION_MESSAGE);
-            }
-            else if(trivflag && !addflag)
-            {
-                JOptionPane.showMessageDialog(null, "All dependencies are trivial or already present\nNo dependency added", "Add Functional Dependency", JOptionPane.INFORMATION_MESSAGE);
-            }
-            else if(trivflag && addflag)
-            {
-                JOptionPane.showMessageDialog(null, "Trivial dependencies not added\nOther dependencies added", "Add Functional Dependency", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "All dependencies are trivial\nNo dependency added", "Add Functional Dependency", JOptionPane.INFORMATION_MESSAGE);
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "Dependencies added", "Add Functional Dependency", JOptionPane.INFORMATION_MESSAGE);
+                Vector<ArrayList<String>> dep = new Vector<>();
+                dep.add(left);
+                dep.add(right);
+                if(dependency.contains(dep))
+                {
+                    JOptionPane.showMessageDialog(null, "Dependencies already present\nNo dependency added", "Add Functional Dependency", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else
+                {
+                    for(Vector<ArrayList<String>> d : dependency)
+                    {
+                        if(d.get(0).equals(left))
+                        {
+                            Vector<Integer> val = new Vector<>();
+                            for(String rightattr : d.get(1))
+                            {
+                                val.add(attribute.indexOf(rightattr));
+                            }
+                            for(String rightattr : right)
+                            {
+                                if(!val.contains(attribute.indexOf(rightattr)))
+                                {
+                                    val.add(attribute.indexOf(rightattr));
+                                }
+                            }
+                            Collections.sort(val);
+                            d.get(1).clear();
+                            for(int i : val)
+                            {
+                                d.get(1).add(attribute.get(i));
+                            }
+                            jList1.clearSelection();
+                            jList2.clearSelection();
+                            Utility.printDependencies(this);
+                            JOptionPane.showMessageDialog(null, "Dependencies updated", "Add Functional Dependency", JOptionPane.INFORMATION_MESSAGE);
+                            return;
+                        }
+                    }
+                    dependency.add(dep);
+                    jList1.clearSelection();
+                    jList2.clearSelection();
+                    Utility.printDependencies(this);
+                    JOptionPane.showMessageDialog(null, "Dependencies added", "Add Functional Dependency", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         }
     }//GEN-LAST:event_jButton11ActionPerformed
@@ -1042,6 +1054,7 @@ public class Main extends javax.swing.JFrame
                 }
                 Utility.printAttributes(this);
                 Utility.printDependencies(this);
+                JOptionPane.showMessageDialog(null, "Attributes deleted", "Delete Attributes", JOptionPane.INFORMATION_MESSAGE);
                 jDialog1.dispose();
             }
         }
@@ -1080,19 +1093,31 @@ public class Main extends javax.swing.JFrame
             box.clear();
             for(Vector<ArrayList<String>> dep : dependency)
             {
-                String s = "";
+                String l = "";
+                String r = "";
                 for(String attr : dep.get(0))
                 {
-                    if(s.isEmpty())
+                    if(l.isEmpty())
                     {
-                        s += attr;
+                        l += attr;
                     }
                     else
                     {
-                        s += ", " + attr;
+                        l += ", " + attr;
                     }
                 }
-                s += " --> " + dep.get(1).get(0);
+                for(String attr : dep.get(1))
+                {
+                    if(r.isEmpty())
+                    {
+                        r += attr;
+                    }
+                    else
+                    {
+                        r += ", " + attr;
+                    }
+                }
+                String s = l + " --> " + r;
                 JCheckBox chk = new JCheckBox(s);
                 chk.setFont(new Font("Times New Roman",0,18));
                 box.add(chk);
@@ -1128,12 +1153,13 @@ public class Main extends javax.swing.JFrame
                     }
                 }
                 Vector<Vector<ArrayList<String>>> dep = new Vector<>();
-                for(Integer n : value)
+                for(int n : value)
                 {
                     dep.add(dependency.get(n));
                 }
                 dependency.removeAll(dep);
                 Utility.printDependencies(this);
+                JOptionPane.showMessageDialog(null, "Dependencies deleted", "Delete Functional Dependency", JOptionPane.INFORMATION_MESSAGE);
                 jDialog3.dispose();
             }
         }
