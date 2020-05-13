@@ -278,24 +278,34 @@ public class Utility
     {
         ArrayList<String> left = dep.get(0);
         ArrayList<String> right = dep.get(1);
-        if(!obj.keys.contains(left))
+        for(ArrayList<String> key : obj.keys)
         {
-            for(ArrayList<String> key : obj.keys)
+            if(left.containsAll(key))
             {
-                if(key.contains(right.get(0)))
-                {
-                    return true;
-                }
+                return true;
             }
-            return false;
         }
-        return true;
+        for(ArrayList<String> key : obj.keys)
+        {
+            if(key.contains(right.get(0)))
+            {
+                return true;
+            }
+        }
+        return false;
     }
     
     private static boolean isBCNF(Main obj, Vector<ArrayList<String>> dep)
     {
         ArrayList<String> left = dep.get(0);
-        return obj.keys.contains(left);
+        for(ArrayList<String> key : obj.keys)
+        {
+            if(left.containsAll(key))
+            {
+                return true;
+            }
+        }
+        return false;
     }
     
     private static void getNormalFormAll(Main obj)
